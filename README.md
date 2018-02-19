@@ -4,9 +4,7 @@ A Common Lisp framework for defining S-expression syntax for generating code in 
 
 ## Example
 
-Define a Javascript function call as an S-expression of the form `(function-name ... arguments)` for the language `js`.
-
-Generate the corresponding Javascript code as `function-name(arg, arg, ...)` generating the strings for the args first with `gen-exprs`.
+Define a Javascript function call as an S-expression of the form `(function-name ... arguments)` for the language `js`. Generate the corresponding Javascript code as `function_name(arg, arg, ...)` generating the strings for the args first with `gen-exprs`.
 
 ```lisp
 (defgen (js stream) (symbol . list) (name . args)
@@ -21,7 +19,7 @@ And then for the Javascript `+` operator with the S-expression form of `(+ arg a
   (format stream "~{~A~^ + ~}" (gen-exprs args)))
 ```
 
-And specify how to generate a sequence of expressions in Javascript:
+And specify how to generate a sequence of expressions in Javascript. Sequences of expressions are automatically prepended with `block` like this: `(block expr expr expr ...)`
 
 ```lisp
 (defgen (js stream) ('block . list) (_ . expressions)
@@ -32,7 +30,7 @@ And specify how to generate a sequence of expressions in Javascript:
 Now generate and print some Javascript to standard output!
 
 ```lisp
-(generate-js t
+(generate t 'js
   (console.log (+ "hello" " " "world")))
 ```
 
