@@ -9,7 +9,7 @@
 ;; so the newest defined ones override previous ones
 
 ;; misc expression
-(defgen (js stream) t expression
+(defgen (js stream) atom expression
   (format stream "~(~S~)" expression))
 
 ;; general function call
